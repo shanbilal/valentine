@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Areeba 💕</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    text-align: center;
+    color: white;
+}
+
+/* Sparkle Background */
+.sparkle {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+/* Floating Emoji Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+/* Main Container */
+.container {
+    margin-top: 15vh;
+    padding: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-size: 50px;
+    text-shadow: 0 0 25px white;
+}
+
+p {
+    font-size: 25px;
+}
+
+/* Buttons */
+button {
+    padding: 15px 35px;
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: white;
+    color: #ff4d6d;
+    box-shadow: 0 0 20px white;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: #ff4d6d;
+    color: white;
+    position: absolute;
+}
+
+/* Letter */
+#loveMessage {
+    margin-top: 30px;
+}
+
+.letter {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    line-height: 1.7;
+    font-size: 18px;
+    animation: scaleIn 1.5s ease forwards;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Love GIF */
+.loveGif {
+    width: 200px;
+    margin-top: 15px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Canvas for fireworks */
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworksCanvas"></canvas>
+
+<div class="container">
+    <h1>Areeba 💕</h1>
+    <p>Will you be my Valentine? 💌</p>
+
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+
+    <div id="loveMessage"></div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const loveMessage = document.getElementById("loveMessage");
+
+/* Move No button */
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+/* YES Click */
+yesBtn.addEventListener("click", function() {
+
+    // Heartfelt Letter
+    loveMessage.innerHTML = `
+        <div class="letter">
+        <strong>Areeba 💕</strong><br><br>
+
+        I know things haven’t been perfect lately, 
+        and maybe I haven’t been perfect either. 
+        But one thing has always been real — how much you mean to me.<br><br>
+
+        You’re not just someone I say “I love you” to. 
+        You’re the person who makes my days lighter, 
+        my problems smaller, and my heart feel full 
+        even from miles away.<br><br>
+
+        Choosing you isn’t just for Valentine’s Day. 
+        I would choose you on the good days, 
+        the bad days, and especially the complicated ones.<br><br>
+
+        So yes… this is me asking you to be my Valentine — 
+        but more than that, to keep choosing us. 💖<br><br>
+
+        No pressure. No drama. Just my honest heart.<br><br>
+
+        – Shan 🌹
+        </div>
+
+        <img class="loveGif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+    `;
+
+    createHearts(50);
+    triggerFireworks();
+});
+
+/* Floating Hearts */
+function createHearts(count) {
+    for (let i = 0; i < count; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+}
+
+/* Continuous Hearts */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💕";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = "6s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 800);
+
+/* Sparkle Generator */
+for (let i = 0; i < 40; i++) {
+    let sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.top = Math.random() * 100 + "vh";
+    sparkle.style.animationDuration = (Math.random() * 2 + 1) + "s";
+    document.body.appendChild(sparkle);
+}
+
+/* Fireworks Canvas Setup */
+const canvas = document.getElementById("fireworksCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+function triggerFireworks() {
+    let particles = [];
+    const colors = ['#ff4d6d', '#fff', '#ffd1dc', '#ff66b3', '#ff99c8'];
+
+    function createParticle(x, y) {
+        return {
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6,
+            alpha: 1,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            radius: Math.random() * 3 + 2
+        };
+    }
+
+    for (let i = 0; i < 150; i++) {
+        particles.push(createParticle(canvas.width/2, canvas.height/3));
+    }
+
+    const interval = setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= 0.02;
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+            ctx.fill();
+        }
+        particles = particles.filter(p => p.alpha > 0);
+        if (particles.length === 0) clearInterval(interval);
+    }, 30);
+}
+</script>
+
+</body>
+</html>
